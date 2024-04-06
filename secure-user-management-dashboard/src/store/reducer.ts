@@ -1,20 +1,19 @@
 interface AppState {
-  users: any[];
+  token: string | null;
 }
 
 const initialState: AppState = {
-  users: [],
+  token: null,
 };
 
 const rootReducer = (state = initialState, action: any) => {
+  // console.log(state, action);
   switch (action.type) {
-    case "SIGNUP_USER":
+    case "SIGNIN_USER":
       return {
         ...state,
-        users: [...state.users, action.payload],
+        token: action.payload,
       };
-    case "SIGNIN_USER":
-      return state;
     default:
       return state;
   }

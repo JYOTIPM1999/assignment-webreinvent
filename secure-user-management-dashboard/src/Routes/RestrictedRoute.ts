@@ -1,19 +1,31 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 interface RestrictedRouteProps {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
-export default function RestrictedRoute({ children }: RestrictedRouteProps) {
+const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ children }) => {
   const navigate = useNavigate();
-  // const { user } = UserAuth();
-  const user = true;
+  const token = useSelector((state: RootState) => state.token);
+  console.log("token", token);
 
-  if (!user) {
-    navigate("/login");
+  // if (!token) {
+  //   return <Navigate to="/signin" replace={true} />;
+  // }
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/signin", { replace: true });
+    }
+  }, [token, navigate]);
+  if (!token) {
     return null;
   }
 
-  return { children };
-}
+  return children;
+};
+
+export default RestrictedRoute;

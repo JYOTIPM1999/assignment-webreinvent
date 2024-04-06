@@ -11,9 +11,9 @@ function App() {
       <Route
         path="/"
         element={
-          // <RestrictedRoute>
-          <Dashboard />
-          // </RestrictedRoute>
+          <RestrictedRoute>
+            <Dashboard />
+          </RestrictedRoute>
         }
       />
       <Route path="/signup" element={<SignUp />} />

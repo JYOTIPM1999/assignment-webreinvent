@@ -4,3 +4,9 @@ export const signupUser = (userData: any) => {
     payload: userData,
   };
 };
+export const signInUser = (userData: any) => {
+  return {
+    type: "SIGNIN_USER",
+    payload: userData,
+  };
+};
