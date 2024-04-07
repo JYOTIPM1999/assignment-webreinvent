@@ -10,7 +10,8 @@ interface RestrictedRouteProps {
 const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ children }) => {
   const navigate = useNavigate();
 
-  const token = useSelector((state: RootState) => state.token);
+  // const token = useSelector((state: RootState) => state.token);
+  const token = localStorage.getItem("token");
   console.log("token", token);
 
   useEffect(() => {
