@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
@@ -9,18 +9,16 @@ interface RestrictedRouteProps {
 
 const RestrictedRoute: React.FC<RestrictedRouteProps> = ({ children }) => {
   const navigate = useNavigate();
+
   const token = useSelector((state: RootState) => state.token);
   console.log("token", token);
 
-  // if (!token) {
-  //   return <Navigate to="/signin" replace={true} />;
-  // }
-
   useEffect(() => {
-    if (!token) {
+    if (token === null) {
       navigate("/signin", { replace: true });
     }
   }, [token, navigate]);
+
   if (!token) {
     return null;
   }
